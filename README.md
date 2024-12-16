@@ -18,6 +18,7 @@ This repository showcases the implementation of classic cryptographic algorithms
   - Diffie-Hellman Key Exchange
   - DES Cipher
   - Gronsfeld Cipher
+This list can be extended.
 - **Graphical Interface:** Intuitive Tkinter-based GUI for easy interaction.
 
 ---

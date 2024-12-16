@@ -71,4 +71,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 For questions or suggestions, feel free to reach out:
-**Email:** [siyovushchik14@gmail.com](mailto:siyovushchik14@gmail.com) | [**LinkedIn**](https://www.linkedin.com/in/siyovush-hamidov-460b39263/) | [**Telegram**](https://t.me/siyovush_hamidov)
+- [**Email**](mailto:siyovushchik14@gmail.com)
+- [**LinkedIn**](https://www.linkedin.com/in/siyovush-hamidov-460b39263/)
+- [**Telegram**](https://t.me/siyovush_hamidov)

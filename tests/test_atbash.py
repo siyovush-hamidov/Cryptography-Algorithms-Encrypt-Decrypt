@@ -1,5 +1,7 @@
-from ciphers import atbash_cipher
+from ciphers.atbash import AtbashCipher
 
 def test_atbash_cipher():
-    assert atbash_cipher("HELLO") == "OLLEH"
-    assert atbash_cipher("Привет! Я пишу программу.") == ".уммаргорп ушип Я !тевирП"
+    assert AtbashCipher.reverse_message("Привет! Пока.") == ".акоП !тевирП"
+    assert AtbashCipher.reverse_sentence("Привет, как дела? Пока.") == "?алед как ,тевирП.акоП "
+    assert AtbashCipher.reverse_word("Привет! Пока.") == "тевирП! акоП."
+    print("ALL IS ALRIGHT")

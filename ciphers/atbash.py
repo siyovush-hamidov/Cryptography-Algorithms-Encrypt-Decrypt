@@ -31,7 +31,3 @@ class AtbashCipher:
             else:
                 reversed_tokens.append(token)
         return ''.join(reversed_tokens)
-    
-print(AtbashCipher.reverse_message("Привет! Пока."))
-print(AtbashCipher.reverse_sentence("Привет, как дела? Пока."))
-print(AtbashCipher.reverse_word("Привет! Пока."))

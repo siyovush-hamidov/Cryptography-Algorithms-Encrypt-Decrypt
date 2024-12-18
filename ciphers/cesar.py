@@ -24,17 +24,9 @@ class CesarCipher:
         return result
     
     @staticmethod
-    def encrypt_unicode(message: str, shift: int) -> str:
-        result = ''
-        for character in message:
-            x = ord(character)
-            result += chr((x + shift) % 0x110000)
-        return result
+    def encrypt_unicode(text, shift):
+        return ''.join(chr((ord(char) + shift) % 1114112) for char in text)
 
     @staticmethod
-    def decrypt_unicode(message: str, shift: int) -> str:
-        result = ''
-        for character in message:
-            x = ord(character)
-            result += chr((x - shift) % 0x110000)
-        return result  
+    def decrypt_unicode(text, shift):
+        return ''.join(chr((ord(char) - shift) % 1114112) for char in text)

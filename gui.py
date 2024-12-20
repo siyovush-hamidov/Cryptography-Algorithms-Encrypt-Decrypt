@@ -5,6 +5,8 @@ from ciphers import *
 class CryptographyApp(ctk.CTk):
     def __init__(self):
         super().__init__()
+        # Для плейфера нужен объект класса поэтому ОБЪЯВЛЕНИЯ ОБЪЕКТОВ ЗДЕСЬ
+        self.playfairCipherObj = PlayfairCipher("")
         self.title("Cryptography Algorithms")
         self.geometry(f"{self.winfo_screenwidth()}x{
                       self.winfo_screenheight()}")
@@ -79,7 +81,7 @@ class CryptographyApp(ctk.CTk):
                     else:
                         output_text = CaesarCipher.encrypt_ascii(input_text, intKey)
                 elif cipher == "Playfair":
-                    output_text = PlayfairCipher.encrypt_ascii(
+                    output_text = self.playfairCipherObj.encrypt_ascii(
                         input_text, keyword)
                 elif cipher == "RSA":
                     output_text = RSACipher.encrypt_ascii(input_text, keyword)

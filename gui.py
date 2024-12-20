@@ -15,7 +15,7 @@ class CryptographyApp(ctk.CTk):
         options_frame.pack(pady=10, fill=ctk.X)
 
         self.cipher_combobox = ctk.CTkComboBox(options_frame, values=[
-            "Atbash", "Caesar", "Playfair", "RSA", "Vertical"])
+            "Atbash", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner"])
         self.cipher_combobox.pack(side=ctk.LEFT, padx=5)
         self.cipher_combobox.set("Atbash")
 
@@ -76,6 +76,8 @@ class CryptographyApp(ctk.CTk):
                     output_text = RSACipher.encrypt_ascii(input_text, keyword)
                 elif cipher == "Vertical":
                     output_text = VerticalCipher.encrypt_ascii(input_text)
+                elif cipher == "Vijiner":
+                    output_text = VigenereCipher.encrypt_ascii(input_text, keyword)
                 else:
                     raise ValueError("Unsupported cipher!")
             else:
@@ -118,6 +120,8 @@ class CryptographyApp(ctk.CTk):
                     output_text = RSACipher.decrypt_ascii(input_text, keyword)
                 elif cipher == "Vertical":
                     output_text = VerticalCipher.decrypt_ascii(input_text)
+                elif cipher == "Vijiner":
+                    output_text = VigenereCipher.decrypt_ascii(input_text, keyword)
                 else:
                     raise ValueError("Unsupported cipher!")
             else:

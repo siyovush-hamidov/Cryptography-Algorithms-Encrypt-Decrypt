@@ -1,4 +1,4 @@
-from ciphers import AtbashCipher
+from ciphers import *
 
 def test_atbash_cipher():
     assert AtbashCipher.reverse_message("Привет! Пока.") == ".акоП !тевирП"

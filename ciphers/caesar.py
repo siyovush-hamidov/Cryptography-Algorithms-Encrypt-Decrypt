@@ -1,4 +1,4 @@
-class CesarCipher:
+class CaesarCipher:
     @staticmethod
     def encrypt_ascii(message: str, shift: int) -> str:
         result = ''

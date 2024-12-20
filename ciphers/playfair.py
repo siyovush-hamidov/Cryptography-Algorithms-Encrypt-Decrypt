@@ -180,7 +180,7 @@ class PlayfairCipher:
         return bigrams  # Возвращаем список биграмм
 
     # Шифрование текста
-    def encrypt(self, source_text):
+    def encrypt_unicode(self, source_text):
         cipher_text = ""  # Результирующий зашифрованный текст
         bigrams = self._bigrams(source_text)  # Разбиваем текст на биграммы
 
@@ -202,7 +202,7 @@ class PlayfairCipher:
         return cipher_text  # Возвращаем зашифрованный текст
 
     # Расшифровка текста
-    def decrypt(self, source_text):
+    def decrypt_unicode(self, source_text):
         plain_text = ""  # Результирующий расшифрованный текст
         bigrams = [source_text[i:i + 2] for i in range(0, len(source_text), 2)]  # Разбиваем текст на биграммы
 

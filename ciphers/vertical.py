@@ -1,6 +1,6 @@
 class VerticalCipher:
     @staticmethod
-    def encrypt(source_text: str, key: str) -> str:
+    def encrypt_unicode(source_text: str, key: str) -> str:
         # Уникальные символы ключа
         unique_key = ''.join(sorted(set(key), key=lambda x: key.index(x)))
         sorted_key = ''.join(sorted(unique_key))
@@ -27,7 +27,7 @@ class VerticalCipher:
         return cipher_text
 
     @staticmethod
-    def decrypt(cipher_text: str, key: str) -> str:
+    def decrypt_unicode(cipher_text: str, key: str) -> str:
         source_text = ""
         # Уникальные символы ключа
         unique_key = ''.join(sorted(set(key), key=lambda x: key.index(x)))

@@ -5,7 +5,7 @@ from random import randint
 class RSACipher:
 
     @staticmethod
-    def rsa_encode_unicode(message: str):
+    def encrypt_unicode(message: str):
         lower_bound = 2 ** (1024 - 1)
         upper_bound = 2 ** 1024 - 1
         # Генерация случайных простых чисел p и q
@@ -34,7 +34,7 @@ class RSACipher:
         return encrypted_message, (d, n)
 
     @staticmethod
-    def rsa_decode_unicode(encrypted_message, private_key):
+    def decrypt_unicode(encrypted_message, private_key):
         d, n = private_key
         # Расшифровка каждого числа в сообщение
         decrypted_message = [chr(pow(c, d, n)) for c in encrypted_message]

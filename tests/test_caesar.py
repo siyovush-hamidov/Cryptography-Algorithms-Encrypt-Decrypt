@@ -1,8 +1,8 @@
-from ciphers.cesar import CesarCipher
+from ciphers.caesar import CaesarCipher
 
-def test_cesar_cipher():
-    assert 'Hello, world' == CesarCipher.decrypt_ascii(
-        CesarCipher.encrypt_ascii('Hello, world', 5), 5
+def test_caesar_cipher():
+    assert 'Hello, world' == CaesarCipher.decrypt_ascii(
+        CaesarCipher.encrypt_ascii('Hello, world', 5), 5
     )
 
     text = """The branch of Lomonosov Moscow State University (MSU) in Dushanbe was 
@@ -19,9 +19,7 @@ and a well-equipped library, the Dushanbe branch plays a significant role in tra
 qualified specialists. Graduates are in demand both in Tajikistan and internationally, 
 contributing to the development of the country and strengthening Russian Tajik cooperation."""
 
-    encrypted = CesarCipher.encrypt_unicode(text, 5)
-    decrypted = CesarCipher.decrypt_unicode(encrypted, 5)
+    encrypted = CaesarCipher.encrypt_unicode(text, 5)
+    decrypted = CaesarCipher.decrypt_unicode(encrypted, 5)
     print (encrypted)
     assert text == decrypted, "Unicode encryption/decryption failed"
-
-    print("ALL IS ALRIGHT")

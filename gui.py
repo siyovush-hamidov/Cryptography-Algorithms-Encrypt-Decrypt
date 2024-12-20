@@ -67,8 +67,17 @@ class CryptographyApp(ctk.CTk):
                 if cipher == "Atbash":
                     output_text = AtbashCipher.reverse_message(input_text)
                 elif cipher == "Caesar":
-                    output_text = CaesarCipher.encrypt_ascii(
-                        input_text, int(keyword))
+                    # Проверка, является ли keyword числом
+                    if keyword.isdigit() or (keyword.startswith('-') and keyword[1:].isdigit()):
+                        intKey = int(keyword)
+                    else:
+                        intKey = len(keyword)
+
+                    # Проверка диапазона ключа для числового значения
+                    if intKey < -255 or intKey > 255:
+                        raise ValueError("Key must be between -255 and 255!")
+                    else:
+                        output_text = CaesarCipher.encrypt_ascii(input_text, intKey)
                 elif cipher == "Playfair":
                     output_text = PlayfairCipher.encrypt_ascii(
                         input_text, keyword)

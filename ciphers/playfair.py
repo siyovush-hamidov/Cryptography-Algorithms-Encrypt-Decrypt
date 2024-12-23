@@ -101,11 +101,11 @@ class PlayfairCipher:
             row2, col2 = self.find_position(char2)
 
             if row1 == row2:  # В одной строке
-                decrypted_text.append(self.matrix[row1][(col1 - 1) % 14])
-                decrypted_text.append(self.matrix[row2][(col2 - 1) % 14])
+                decrypted_text.append(self.matrix[row1][(col1 - 1) % 16])
+                decrypted_text.append(self.matrix[row2][(col2 - 1) % 16])
             elif col1 == col2:  # В одном столбце
-                decrypted_text.append(self.matrix[(row1 - 1) % 16][col1])
-                decrypted_text.append(self.matrix[(row2 - 1) % 16][col2])
+                decrypted_text.append(self.matrix[(row1 - 1) % 14][col1])
+                decrypted_text.append(self.matrix[(row2 - 1) % 14][col2])
             else:  # Прямоугольник
                 decrypted_text.append(self.matrix[row1][col2])
                 decrypted_text.append(self.matrix[row2][col1])

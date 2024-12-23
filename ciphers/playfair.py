@@ -10,22 +10,13 @@ class PlayfairCipher:
         2. Удаляет дублирующиеся символы, сохраняя порядок.
         """
         # Создаём полный набор символов от пробела (ASCII 32) до 'я'
-        characters = "".join(chr(i).encode('latin1').decode('cp1251', errors='replace') for i in range(32, 256))
+        characters = "".join(chr(i).encode('latin1').decode(
+            'cp1251', errors='replace') for i in range(32, 256))
         # Объединяем ключ и полный набор символов, удаляем дубликаты
         full_set = "".join(dict.fromkeys(keyword + characters))
         # Разбиваем на строки по 16 символов
         matrix = [full_set[i:i + 16] for i in range(0, len(full_set), 16)]
-        self.print_matrix(matrix)
         return matrix
-
-    def print_matrix(self, matrix):
-        """
-        Выводит матрицу ключа в удобочитаемом формате.
-        """
-        print("Playfair Cipher Key Matrix:")
-        for row in matrix:
-            print(" ".join(row))
-        print()
 
     def find_position(self, char):
         """

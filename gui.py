@@ -127,7 +127,7 @@ class CryptographyApp(ctk.CTk):
         mode = self.radio_var.get()
 
         # Список доступных шифров
-        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner"]
+        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner","DESS"]
 
         # Переменная для хранения результатов
         results = []
@@ -178,6 +178,8 @@ class CryptographyApp(ctk.CTk):
                                 result = VerticalCipher.encrypt_ascii(input_text, key)
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.encrypt_ascii(input_text, key)
+                            elif cipher == "DESS":
+                                result = CustomDESCipher.encrypt(input_text, key)    
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:
@@ -191,6 +193,8 @@ class CryptographyApp(ctk.CTk):
                                 result = VerticalCipher.encrypt_unicode(input_text, key)
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.encrypt_unicode(input_text, key)
+                            elif cipher == "DESS":
+                                result = CustomDESCipher.encrypt(input_text, key)    
                             else:
                                 raise ValueError("Unsupported cipher!")
                         # Добавляем успешный результат
@@ -216,7 +220,7 @@ class CryptographyApp(ctk.CTk):
         mode = self.radio_var.get()
 
         # Список доступных шифров
-        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner"]
+        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS"]
 
         # Переменная для хранения результатов
         results = []
@@ -267,6 +271,8 @@ class CryptographyApp(ctk.CTk):
                                 result = VerticalCipher.decrypt_ascii(input_text, key)
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.decrypt_ascii(input_text, key)
+                            elif cipher == "DESS":
+                                result = CustomDESCipher.decrypt(input_text, key)    
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:
@@ -280,6 +286,8 @@ class CryptographyApp(ctk.CTk):
                                 result = VerticalCipher.decrypt_unicode(input_text, key)
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.decrypt_unicode(input_text, key)
+                            elif cipher == "DESS":
+                                result = CustomDESCipher.decrypt(input_text, key)    
                             else:
                                 raise ValueError("Unsupported cipher!")
                         # Добавляем успешный результат

@@ -4,6 +4,7 @@ from .playfair import PlayfairCipher
 from .rsa import RSACipher
 from .vertical import VerticalCipher
 from .vijiner import VigenereCipher
+from .dess import CustomDESCipher
 
 __all__ = [
     "AtbashCipher",
@@ -12,4 +13,5 @@ __all__ = [
     "RSACipher",
     "VerticalCipher",
     "VigenereCipher",
+    "CustomDESCipher",
 ]

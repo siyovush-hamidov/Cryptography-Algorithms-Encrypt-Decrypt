@@ -9,7 +9,7 @@ class CryptographyApp(ctk.CTk):
         self.geometry(f"{self.winfo_screenwidth()}x{
                       self.winfo_screenheight()}")
         # self.resizable(False, False)
-        self.available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner"]
+        self.available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner","DESS","Gronsfeld"]
 
         # Frame for cipher and encoding options
         options_frame = ctk.CTkFrame(self)
@@ -63,9 +63,6 @@ class CryptographyApp(ctk.CTk):
         input_text = self.input_text.get("1.0", ctk.END).strip()
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
-
-        # Список доступных шифров
-        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner","DESS","Gronsfeld"]
 
         # Переменная для хранения результатов
         results = []
@@ -163,10 +160,6 @@ class CryptographyApp(ctk.CTk):
         input_text = self.input_text.get("1.0", ctk.END).strip()
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
-
-        # Список доступных шифров
-        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS","Gronsfeld"]
-
         # Переменная для хранения результатов
         results = []
 

@@ -23,7 +23,7 @@ class CustomDESCipher:
         return key
 
     @staticmethod
-    def encrypt(plaintext, key):
+    def encrypt_ascii(plaintext, key):
         """
         Шифрует текст с использованием алфавита charTable.
         :param plaintext: Открытый текст для шифрования.
@@ -46,7 +46,7 @@ class CustomDESCipher:
         return encrypted
 
     @staticmethod
-    def decrypt(ciphertext, key):
+    def decrypt_ascii(ciphertext, key):
         """
         Дешифрует текст с использованием алфавита charTable.
         :param ciphertext: Зашифрованный текст в виде строки.

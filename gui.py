@@ -64,6 +64,9 @@ class CryptographyApp(ctk.CTk):
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
 
+        # Список доступных шифров
+        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner","DESS","Gronsfeld"]
+
         # Переменная для хранения результатов
         results = []
 
@@ -117,7 +120,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.encrypt_ascii(input_text, key)
                             elif cipher == "DESS":
-                                result = CustomDESCipher.encrypt(input_text, key)    
+                                result = CustomDESCipher.encrypt_ascii(input_text, key)
+                            elif cipher == "Gronsfeld":
+                                result = GronsfeldCipher.encrypt_ascii(input_text, key)        
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:
@@ -132,7 +137,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.encrypt_unicode(input_text, key)
                             elif cipher == "DESS":
-                                result = CustomDESCipher.encrypt(input_text, key)    
+                                result = CustomDESCipher.encrypt_unicode(input_text, key)
+                            elif cipher == "Gronsfeld":
+                                result = GronsfeldCipher.encrypt_unicode(input_text, key)        
                             else:
                                 raise ValueError("Unsupported cipher!")
                         # Добавляем успешный результат
@@ -156,7 +163,10 @@ class CryptographyApp(ctk.CTk):
         input_text = self.input_text.get("1.0", ctk.END).strip()
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
-        
+
+        # Список доступных шифров
+        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS","Gronsfeld"]
+
         # Переменная для хранения результатов
         results = []
 
@@ -207,7 +217,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.decrypt_ascii(input_text, key)
                             elif cipher == "DESS":
-                                result = CustomDESCipher.decrypt(input_text, key)    
+                                result = CustomDESCipher.decrypt_ascii(input_text, key)
+                            elif cipher == "Gronsfeld":
+                                result = GronsfeldCipher.decrypt_ascii(input_text, key)        
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:
@@ -222,7 +234,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Vijiner":
                                 result = VigenereCipher.decrypt_unicode(input_text, key)
                             elif cipher == "DESS":
-                                result = CustomDESCipher.decrypt(input_text, key)    
+                                result = CustomDESCipher.decrypt_unicode(input_text, key)
+                            elif cipher == "Gronsfeld":
+                                result = GronsfeldCipher.decrypt_unicode(input_text, key)        
                             else:
                                 raise ValueError("Unsupported cipher!")
                         # Добавляем успешный результат

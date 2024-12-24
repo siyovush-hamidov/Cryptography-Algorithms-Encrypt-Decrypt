@@ -5,12 +5,11 @@ import itertools
 class CryptographyApp(ctk.CTk):
     def __init__(self):
         super().__init__()
-        # Для плейфера нужен объект класса поэтому ОБЪЯВЛЕНИЯ ОБЪЕКТОВ ЗДЕСЬ
-        self.playfairCipherObj = PlayfairCipher("")
         self.title("Cryptography Algorithms")
         self.geometry(f"{self.winfo_screenwidth()}x{
                       self.winfo_screenheight()}")
         # self.resizable(False, False)
+        self.available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner"]
 
         # Frame for cipher and encoding options
         options_frame = ctk.CTkFrame(self)
@@ -31,13 +30,16 @@ class CryptographyApp(ctk.CTk):
         self.keyword_entry = ctk.CTkEntry(
             options_frame, placeholder_text="Keyword (if applicable)", width=150)
         self.keyword_entry.pack(side=ctk.LEFT, padx=5)
-        # self.keyword_entry.insert(-1, "Хамидов Сиёвуш Халифабобоевич") | ДЛЯ ХАРДКОДА | НЕ СТИРАТЬ!
+        self.keyword_entry.insert(-1, "Шукурзода Саидмехродж Рустам")
+        # | ДЛЯ ХАРДКОДА | НЕ СТИРАТЬ!
 
         # Input Memo
         self.input_text = ctk.CTkTextbox(
             self, width=700, height=self.winfo_screenheight() // 4)
         self.input_text.pack(pady=5, fill=ctk.X)
-        # self.input_text.insert("1.0", "") ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ
+
+        self.input_text.insert("1.0", """ИшшСЧъу!!жвщ$Ьшде!ЬжЯ"а'тпишсд0ъСъдр%ъгЧф%утъ%ох де!мжтуфси!в$фиЮ$дфшСв#Ссшеоехпии0оЖсшеоехпджнн%пжв"ЬашипшСтуъ"пдЩ$р!и(тухе"в$Шкяпрдфтн0ъ"вжпжсСфшСтуд!юу#Я!дпцжоеисхд!дшСъифСпЭюджсСожШ нн!Яж!мжтуфсх'мъсСшуж Сф%с0х"ЩехфСсСъ%д!моыЫдр!м#ЬтуЩ Я3!а(ифдеи!жЬжтсрфСф%сжв"ЬашипшСтуд!Ссшеоехпии0ълЧяшихъдшаит(ифд!у@мЯ$ауэяфдСчфяжв"ЬашипшСтуфBжв"ЬашипшСтуъ"миннц!@еЬжЯ"а'тпжхаъожЮ!иеСужх!жЬжтсрфСфдх@еЬжЯ"а'тпишуэ$вже*мсСШ$схЯ3мРжесэяухопСъ%ЬжЯ"а'тпишуэ!жЬжтсрф Щихутъ%Я$ауЬ%ЩюжедъхршСЯ%Щ!фрюЩдр!д!имеСс(ичддп Щпьр!ехх-аъодехпнхец!0ъ!жуп.оСфии!иппиодппьр!чихмтуъ0Я$ауэяфдоииъхъ%Ьэя!жЬжтсрфСф%с!мишуфспишсд0хфхЯ%тушСтуд!д!Я$пцдмСфсх%Шэпишсд0хъЩьлСппьр!ъисСе!охтфич Я/""") 
+        # ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ!!!
 
         # Frame for buttons
         button_frame = ctk.CTkFrame(self)
@@ -62,9 +64,6 @@ class CryptographyApp(ctk.CTk):
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
 
-        # Список доступных шифров
-        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner","DESS"]
-
         # Переменная для хранения результатов
         results = []
 
@@ -84,10 +83,13 @@ class CryptographyApp(ctk.CTk):
             # Генерация ключей
             words = keyword.split()
 
-            for cipher in available_ciphers:
+            for cipher in self.available_ciphers:
                 if cipher == "Caesar":
                     # Генерируем числовые ключи для Caesar
+                        
                     key_combinations = []
+                    if(keyword.isdigit()):
+                        key_combinations.append(int(keyword))
                     for word in words:
                         key_combinations.append(len(word))
                     key_combinations = sorted(set(key_combinations))
@@ -107,7 +109,7 @@ class CryptographyApp(ctk.CTk):
                             if cipher == "Caesar":
                                 result = CaesarCipher.encrypt_ascii(input_text, int(key))
                             elif cipher == "Playfair":
-                                result = self.playfairCipherObj.encrypt_ascii(input_text, key)
+                                result = PlayfairCipher.encrypt_ascii(input_text, key)
                             elif cipher == "RSA":
                                 result = RSACipher.encrypt_ascii(input_text, key)
                             elif cipher == "Vertical":
@@ -154,10 +156,7 @@ class CryptographyApp(ctk.CTk):
         input_text = self.input_text.get("1.0", ctk.END).strip()
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
-
-        # Список доступных шифров
-        available_ciphers = ["Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS"]
-
+        
         # Переменная для хранения результатов
         results = []
 
@@ -177,7 +176,7 @@ class CryptographyApp(ctk.CTk):
             # Генерация ключей
             words = keyword.split()
 
-            for cipher in available_ciphers:
+            for cipher in self.available_ciphers:
                 if cipher == "Caesar":
                     # Генерируем числовые ключи для Caesar
                     key_combinations = []
@@ -200,7 +199,7 @@ class CryptographyApp(ctk.CTk):
                             if cipher == "Caesar":
                                 result = CaesarCipher.decrypt_ascii(input_text, int(key))
                             elif cipher == "Playfair":
-                                result = self.playfairCipherObj.decrypt_ascii(input_text, key)
+                                result = PlayfairCipher.decrypt_ascii(input_text, key)
                             elif cipher == "RSA":
                                 result = RSACipher.decrypt_ascii(input_text, key)
                             elif cipher == "Vertical":

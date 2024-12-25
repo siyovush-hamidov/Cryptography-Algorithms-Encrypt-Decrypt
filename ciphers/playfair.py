@@ -2,7 +2,7 @@ class PlayfairCipher:
     def create_matrix(key):
         matrix = []
         used_chars = set()
-        char_table = characters = "".join(chr(i).encode('latin1').decode('cp1251', errors='replace') for i in range(32, 256))
+        char_table = "".join(chr(i).encode('latin1').decode('cp1251', errors='replace') for i in range(32, 256))
         
         # Убираем дубликаты в ключе
         key_chars = [char for char in key if char not in used_chars and not used_chars.add(char)]

@@ -9,6 +9,7 @@ class CryptographyApp(ctk.CTk):
         self.title("Cryptography Algorithms")
         self.geometry(f"{self.winfo_screenwidth()}x{
                       self.winfo_screenheight()}")
+
         self.available_ciphers = ["Caesar", "Playfair",
                                   "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld"]
         self.ascii_alphabet = "".join(chr(i).encode('latin1').decode(
@@ -55,8 +56,7 @@ class CryptographyApp(ctk.CTk):
         self.input_text = ctk.CTkTextbox(
             self, width=700, height=self.winfo_screenheight() // 4)
         self.input_text.pack(pady=5, fill=ctk.X)
-
-        self.input_text.insert("1.0", """""")
+        #self.input_text.insert("1.0", """""")
         # ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ!!!
 
         # Frame for buttons

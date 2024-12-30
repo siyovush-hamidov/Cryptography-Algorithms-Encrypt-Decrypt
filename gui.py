@@ -27,6 +27,21 @@ class CryptographyApp(ctk.CTk):
             options_frame, text="UNICODE", variable=self.radio_var, value="UNICODE")
         unicode_radio.pack(side=ctk.LEFT, padx=5)
 
+        # Key Generation Mode: Single Words/Combination of Words
+        self.key_mode_var = ctk.StringVar()
+        self.key_mode_var.set("Single Words")  # Default to Single Words
+
+        single_words_radio = ctk.CTkRadioButton(
+            options_frame, text="Single Words", variable=self.key_mode_var, value="Single Words"
+        )
+        single_words_radio.pack(side=ctk.LEFT, padx=5)
+
+        combo_words_radio = ctk.CTkRadioButton(
+            options_frame, text="Combination of Words", variable=self.key_mode_var, value="Combination of Words"
+        )
+        combo_words_radio.pack(side=ctk.LEFT, padx=5)
+
+        # для ввода ключевого слова
         # ComboBox for selecting cipher
         self.cipher_combobox = ctk.CTkComboBox(
             options_frame, values=self.available_ciphers, state="normal", width=150)
@@ -61,7 +76,7 @@ class CryptographyApp(ctk.CTk):
         self.input_text = ctk.CTkTextbox(
             self, width=700, height=self.winfo_screenheight() // 4)
         self.input_text.pack(pady=5, fill=ctk.X)
-        #self.input_text.insert("1.0", """""")
+        # self.input_text.insert("1.0", """""")
         # ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ!!!
 
         # Frame for buttons
@@ -81,21 +96,41 @@ class CryptographyApp(ctk.CTk):
             self, width=700, height=self.winfo_screenheight() // 2)
         self.output_text.pack(pady=5, fill=ctk.X)
 
+    def generate_keys(self, keyword):
+        """
+        Generate keys based on the selected key mode (Single Words or Combination of Words).
+        """
+        key_mode = self.key_mode_var.get()
+        words = keyword.split()
+        
+        if key_mode == "Single Words":
+            # Generate individual words as keys
+            return sorted(set(words))
+        elif key_mode == "Combination of Words":
+            # Generate combinations of words as keys
+            key_combinations = []
+            max_words_in_combination = 3  # Limit for combinations
+            for i in range(1, min(len(words), max_words_in_combination) + 1):
+                for combination in itertools.permutations(words, i):
+                    key_combinations.append(" ".join(combination))
+            return sorted(set(key_combinations))
+        else:
+            raise ValueError("Invalid key mode selected.")
+
     def encrypt(self):
         # Получаем параметры из UI
         input_text = self.input_text.get("1.0", ctk.END).strip()
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
+        
         rsa_p = self.rsa_p_edit.get().strip()
         rsa_q = self.rsa_q_edit.get().strip()
         rsa_d = self.rsa_d_edit.get().strip()
         rsa_n = self.rsa_n_edit.get().strip()
-
+        
         selected_cipher = self.cipher_combobox.get()
-
         # Переменная для хранения результатов
         results = []
-
         # Проверка на пустое значение keyword
         if not keyword.strip():
             self.output_text.delete("1.0", ctk.END)
@@ -107,34 +142,26 @@ class CryptographyApp(ctk.CTk):
             self.output_text.delete("1.0", ctk.END)
             self.output_text.insert(ctk.END, "Error: Invalid mode selected.")
             return
-
         try:
             # Генерация ключей
+            keys = []
             words = keyword.split()
+            # Переменная для хранения результатов
 
             ciphers_to_use = [selected_cipher] if selected_cipher != "All" else self.available_ciphers[1:]
 
             for cipher in ciphers_to_use:
                 if cipher == "Caesar":
                     # Генерируем числовые ключи для Caesar
-
-                    key_combinations = []
                     if (keyword.isdigit()):
-                        key_combinations.append(int(keyword))
+                        keys.append(int(keyword))
                     for word in words:
-                        key_combinations.append(len(word))
-                    key_combinations = sorted(set(key_combinations))
+                        keys.append(len(word))
                 else:
-                    # Генерируем текстовые ключи для остальных шифров
-                    key_combinations = []
-                    max_words_in_combination = 3  # Ограничение
-                    for i in range(1, min(len(words), max_words_in_combination) + 1):
-                        for combination in itertools.permutations(words, i):
-                            key_combinations.append(" ".join(combination))
-                    key_combinations = sorted(set(key_combinations))
+                    keys = self.generate_keys(keyword)
 
                 # Перебор ключей
-                for key in key_combinations:
+                for key in keys:
                     try:
                         if mode == "ASCII":
                             if cipher == "Caesar":
@@ -145,8 +172,9 @@ class CryptographyApp(ctk.CTk):
                                     input_text, key)
                             elif cipher == "RSA":
                                 result, rsa_d, rsa_n = RSACipher.encrypt_ascii(
-                                    input_text, self.ascii_alphabet, int(rsa_p), int(rsa_q)) 
-                                results.append(f"P: {rsa_p} | Q: {rsa_q} | D: {rsa_d} | N: {rsa_n}")
+                                    input_text, self.ascii_alphabet, int(rsa_p), int(rsa_q))
+                                results.append(f"P: {rsa_p} | Q: {rsa_q} | D: {
+                                               rsa_d} | N: {rsa_n}")
                             elif cipher == "Vertical":
                                 result = VerticalCipher.encrypt_ascii(
                                     input_text, key)
@@ -231,27 +259,20 @@ class CryptographyApp(ctk.CTk):
         try:
             # Генерация ключей
             words = keyword.split()
-
+            keys = [] 
             ciphers_to_use = [selected_cipher] if selected_cipher != "All" else self.available_ciphers[1:]
-
             for cipher in ciphers_to_use:
                 if cipher == "Caesar":
                     # Генерируем числовые ключи для Caesar
-                    key_combinations = []
+                    if (keyword.isdigit()):
+                        keys.append(int(keyword))
                     for word in words:
-                        key_combinations.append(len(word))
-                    key_combinations = sorted(set(key_combinations))
+                        keys.append(len(word))
                 else:
-                    # Генерируем текстовые ключи для остальных шифров
-                    key_combinations = []
-                    max_words_in_combination = 3  # Ограничение
-                    for i in range(1, min(len(words), max_words_in_combination) + 1):
-                        for combination in itertools.permutations(words, i):
-                            key_combinations.append(" ".join(combination))
-                    key_combinations = sorted(set(key_combinations))
-
+                    keys = self.generate_keys(keyword)
+            
                 # Перебор ключей
-                for key in key_combinations:
+                for key in keys:
                     try:
                         if mode == "ASCII":
                             if cipher == "Caesar":
@@ -263,7 +284,7 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "RSA":
                                 result = RSACipher.decrypt_ascii(input_text, int(
                                     rsa_d), int(rsa_n), self.ascii_alphabet)
-                                results.append(f"D: {rsa_d} | N: {rsa_n}" )
+                                results.append(f"D: {rsa_d} | N: {rsa_n}")
                             elif cipher == "Vertical":
                                 result = VerticalCipher.decrypt_ascii(
                                     input_text, key)

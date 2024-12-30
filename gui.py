@@ -7,16 +7,15 @@ class CryptographyApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Cryptography Algorithms")
-        self.geometry(f"{self.winfo_screenwidth()}x{
-                      self.winfo_screenheight()}")
+        self.geometry(f"{self.winfo_screenwidth()}x{self.winfo_screenheight()}")
 
-        self.available_ciphers = ["Caesar", "Playfair",
-                                  "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld"]
+        self.available_ciphers = ["All", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld"]
         self.ascii_alphabet = "".join(chr(i).encode('latin1').decode(
             'cp1251', errors='replace') for i in range(32, 256))
 
         options_frame = ctk.CTkFrame(self)
         options_frame.pack(pady=10, fill=ctk.X)
+        
         self.radio_var = ctk.StringVar()
         self.radio_var.set("ASCII")
 
@@ -28,7 +27,13 @@ class CryptographyApp(ctk.CTk):
             options_frame, text="UNICODE", variable=self.radio_var, value="UNICODE")
         unicode_radio.pack(side=ctk.LEFT, padx=5)
 
-        # для ввода ключевого слова
+        # ComboBox for selecting cipher
+        self.cipher_combobox = ctk.CTkComboBox(
+            options_frame, values=self.available_ciphers, state="normal", width=150)
+        self.cipher_combobox.set("All")  # Default option
+        self.cipher_combobox.pack(side=ctk.LEFT, padx=5)
+
+        # Keyword and RSA inputs
         self.keyword_entry = ctk.CTkEntry(
             options_frame, placeholder_text="Keyword (if applicable)", width=150)
         self.keyword_entry.pack(side=ctk.LEFT, padx=5)
@@ -86,6 +91,8 @@ class CryptographyApp(ctk.CTk):
         rsa_d = self.rsa_d_edit.get().strip()
         rsa_n = self.rsa_n_edit.get().strip()
 
+        selected_cipher = self.cipher_combobox.get()
+
         # Переменная для хранения результатов
         results = []
 
@@ -105,7 +112,9 @@ class CryptographyApp(ctk.CTk):
             # Генерация ключей
             words = keyword.split()
 
-            for cipher in self.available_ciphers:
+            ciphers_to_use = [selected_cipher] if selected_cipher != "All" else self.available_ciphers[1:]
+
+            for cipher in ciphers_to_use:
                 if cipher == "Caesar":
                     # Генерируем числовые ключи для Caesar
 
@@ -199,6 +208,9 @@ class CryptographyApp(ctk.CTk):
         input_text = self.input_text.get("1.0", ctk.END).strip()
         keyword = self.keyword_entry.get().strip()
         mode = self.radio_var.get()
+
+        selected_cipher = self.cipher_combobox.get()
+
         # Переменная для хранения результатов
         results = []
         rsa_d = self.rsa_d_edit.get().strip()
@@ -220,7 +232,9 @@ class CryptographyApp(ctk.CTk):
             # Генерация ключей
             words = keyword.split()
 
-            for cipher in self.available_ciphers:
+            ciphers_to_use = [selected_cipher] if selected_cipher != "All" else self.available_ciphers[1:]
+
+            for cipher in ciphers_to_use:
                 if cipher == "Caesar":
                     # Генерируем числовые ключи для Caesar
                     key_combinations = []

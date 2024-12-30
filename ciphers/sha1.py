@@ -10,7 +10,7 @@ class Sha_1:
 
     @staticmethod
     def _left_rotate(n, b):
-        """Циклический сдвиг налево"""
+        """Циклический сдвиг налево""" 
         return ((n << b) | (n >> (32 - b))) & 0xffffffff
 
     @staticmethod

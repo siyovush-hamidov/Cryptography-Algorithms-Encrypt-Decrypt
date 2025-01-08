@@ -352,7 +352,6 @@ class CryptographyApp(ctk.CTk):
                         )
         except Exception as e:
             results.append(f"Error: {str(e)}")
-        results.append("Привет как дела?")
         with open("results.txt", "w", encoding="utf-8") as file:
             file.write("\n".join(results))
         # Вывод всех результатов в output_text

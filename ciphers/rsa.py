@@ -1,6 +1,5 @@
-from sympy import randprime, mod_inverse, gcd
+from sympy import mod_inverse, gcd
 from random import randint
-
 
 class RSACipher:
     @staticmethod
@@ -53,9 +52,6 @@ class RSACipher:
     def encrypt_unicode(message: str, p, q):
         lower_bound = 2 ** (1024 - 1)
         upper_bound = 2 ** 1024 - 1
-        # Генерация случайных простых чисел p и q
-        p = randprime(lower_bound, upper_bound)
-        q = randprime(lower_bound, upper_bound)
         # Вычисление модуля n и функции Эйлера phi(n)
         n = p * q
         phi_n = (p - 1) * (q - 1)
@@ -78,12 +74,103 @@ class RSACipher:
         # Возврат зашифрованного сообщения и закрытого ключа
         return encrypted_message, (d, n)
 
+    def find_d_and_e(p, q):
+        n = p * q
+        fi_n = (p - 1) * (q - 1)
+
+        d = n - 1
+        i = 2
+
+        while i <= fi_n:
+            if d % i == 0:
+                d -= 1
+                i = 2
+                continue
+            i += 1
+
+        e = 10
+        while (e * d) % fi_n != 1:
+            e += 1
+
+        return d, e, n, fi_n
+
+
     @staticmethod
-    def decrypt_unicode(encrypted_message, private_key, p, q):
-        d, n = private_key
-        # Расшифровка каждого числа в сообщение
-        decrypted_message = [chr(pow(c, d, n)) for c in encrypted_message]
-        return ''.join(decrypted_message)
+    def decrypt_unicode(encrypted_message, p, q):
+        try:
+            n = p * q
+            fi_n = (p - 1) * (q - 1)
+
+            d = n - 1
+            i = 2
+
+            while i <= fi_n:
+                if d % i == 0:
+                    d -= 1
+                    i = 2
+                    continue
+                i += 1
+
+            e = 10
+            while (e * d) % fi_n != 1:
+                e += 1
+                n = p * q
+                fi_n = (p - 1) * (q - 1)
+        except Exception as e:
+            return f"Ошибка при вычислении n или φ(n): {e} или Не удалось найти подходящие значения e и d"
+        
+        # try:
+        #     # Поиск e и вычисление d
+        #     e, d = None, None
+        #     for candidate_e in range(10, fi_n):
+        #         if gcd(candidate_e, fi_n) == 1:
+        #             e = candidate_e
+        #             d = mod_inverse(e, fi_n)
+        #             break
+        #     if e is None or d is None:
+                
+        # except Exception as e:
+        #     return f"Ошибка при вычислении e и d: {e}"
+        
+        decrypted_message = ""
+        for char in encrypted_message:
+            try:
+                c = ord(char) - 32  # Убираем сдвиг до 32-го символа
+                decrypted_char = chr((pow(c, d, n) % (0x10FFFF - 32)) + 32)  # Расшифровка и возврат в диапазон Unicode
+                decrypted_message += decrypted_char
+                # c = ord(char)  # Преобразуем символ в его числовое представление
+                # decrypted_char = chr(pow(c, d, n))  # Расшифровка символа
+                # decrypted_message += decrypted_char
+            except Exception as e:
+                return f"Ошибка при расшифровке символа '{char}': {e}"
+        
+        return n, fi_n, e, d, decrypted_message
+    
+    # def decrypt_unicode(encrypted_message, p, q):
+    #     n = p * q
+    #     fi_n = (p - 1) * (q - 1)
+        
+    #     # Поиск e и вычисление d
+    #     e = None
+    #     d = None
+    #     for candidate_e in range(2, fi_n):
+    #         if gcd(candidate_e, fi_n) == 1:
+    #             e = candidate_e
+    #             d = mod_inverse(e, fi_n)
+    #             break
+        
+    #     if e is None or d is None:
+    #         return ''.join("Не удалось найти подходящие значения e и d")
+    #         # raise ValueError("Не удалось найти подходящие значения e и d")
+        
+    #     # Расшифровка сообщения
+    #     decrypted_message = ""
+    #     for char in encrypted_message:
+    #         c = ord(char)  # Преобразуем символ в его числовое представление
+    #         decrypted_char = chr(pow(c, d, n))  # Расшифровка символа
+    #         decrypted_message += decrypted_char
+        
+    #     return ''.join(decrypted_message)
 
 
 # # Пример использования

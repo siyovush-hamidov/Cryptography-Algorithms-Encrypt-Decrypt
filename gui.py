@@ -278,7 +278,8 @@ class CryptographyApp(ctk.CTk):
                     if (keyword.isdigit()):
                         keys.append(int(keyword))
                     for word in words:
-                        keys.append(len(word))
+                        if len(word) not in keys:
+                            keys.append(len(word)) 
                 else:
                     keys = self.generate_keys(keyword)
             

@@ -9,7 +9,7 @@ class CryptographyApp(ctk.CTk):
         self.title("Cryptography Algorithms")
         self.geometry(f"{self.winfo_screenwidth()}x{self.winfo_screenheight()}")
 
-        self.available_ciphers = ["All", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld"]
+        self.available_ciphers = ["All", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld", "Hill"]
         self.ascii_alphabet = "".join(chr(i).encode('latin1').decode(
             'cp1251', errors='replace') for i in range(32, 256))
 
@@ -52,7 +52,7 @@ class CryptographyApp(ctk.CTk):
         self.keyword_entry = ctk.CTkEntry(
             options_frame, placeholder_text="Keyword (if applicable)", width=150)
         self.keyword_entry.pack(side=ctk.LEFT, padx=5)
-        self.keyword_entry.insert(-1, "КУПИ ПИВО!")
+        # self.keyword_entry.insert(-1, "КУПИ ПИВО!")
         # | ДЛЯ ХАРДКОДА | НЕ СТИРАТЬ!
         # ДЛЯ ВВОДА ПРОСТЫХ ЧИСЕЛ В RSA:
         self.rsa_p_edit = ctk.CTkEntry(
@@ -196,6 +196,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Gronsfeld":
                                 result = GronsfeldCipher.encrypt_ascii(
                                     input_text, key)
+                            elif cipher == "Hill":
+                                result = HillCipher.encrypt_ascii(
+                                    input_text, key)                                
                             elif cipher == "Sha_1":
                                 result = Sha_1.sha_1(key.encode('utf-8'))  
                             else:
@@ -309,6 +312,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Gronsfeld":
                                 result = GronsfeldCipher.decrypt_ascii(
                                     input_text, key)
+                            elif cipher == "Hill":
+                                result = HillCipher.decrypt_ascii(
+                                    input_text, key)                                
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:

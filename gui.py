@@ -9,7 +9,7 @@ class CryptographyApp(ctk.CTk):
         self.title("Cryptography Algorithms")
         self.geometry(f"{self.winfo_screenwidth()}x{self.winfo_screenheight()}")
 
-        self.available_ciphers = ["All", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld", "Hill"]
+        self.available_ciphers = ["All", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld", "Hill", "Algebra"]
         self.ascii_alphabet = "".join(chr(i).encode('latin1').decode(
             'cp1251', errors='replace') for i in range(32, 256))
 
@@ -76,7 +76,7 @@ class CryptographyApp(ctk.CTk):
         self.input_text = ctk.CTkTextbox(
             self, width=700, height=self.winfo_screenheight() // 4)
         self.input_text.pack(pady=5, fill=ctk.X)
-        # self.input_text.insert("1.0", """Ебипабэббюуэrйболэщmептуйдбжутщ&ибшйювщ0ебнньц%йщfожбгювшаипгбнньц0mыбфшбклэm<oщльыижолэщmймйcгпиойлcшщmапmщбмвроптуйcнпейшдлбшже0iщбисфхиойщ0ймйciридмбхиойз/nЙжипабропйmаяпдiрммопйmпвбхажхзоййmаяжетубгпывхnщпвпк%ййсбхбшхвнохлcй&йшалмбелэйmаяпдiрммщ"йcтсжетугб0mбюфъбхfтпыяъйжnйжипабргэщ%пвiрвпъвщoебнньцcйnйжипабропcйябпмчмфяшййmхатфстщ"шбтужнч2nЙжипаброптущ#лпммэгйлжрйк%йвжябзхйгбжутщ&аяйоруйжй#нжщiап&йхаепfтiрхйойщ%аяжебюрвгмжопш$йжбтfаюйипгболэй#мйржй#йоюдьажрии0mлпювiрщ&нпзжщfлсуэfйфлбойiшбтужнпкfй%йfтвх$ййiхвмжлпммэгйлжрйпннщлtйбаюач(&Йпмвшйлйiвжипабэббюшвfйлмяшбжщfйfхбпсiйобмййtгпинпзлэщmoуюайtйcлтвпщiюбвюгжутfтфяшйщmнжщiаявюйгпежктугйх6&щгмряшйцтщ&юбгпгъаобюуэщ%хвщmопьа0mаябгйм&йпгжежопш0mлпювсьнй&йпмчмхгутщ&лполхаэвпр%йуабойижрпш&йша%йасбввюлжcйдэаюнбшжйcйcееtййрвшз,""")
+        # self.input_text.insert("1.0", """ڤڢгڤҊڶڶؚвؚڢвҊ੄Ξסߊؚסশڢڤ۵ӚϏסڢௌߊؚۙҊߊڢબڢгסज़ߊؚΊҊબӚҊؚۙвҊڶ٬۵Ӛؚàज़ίвס۵ௌ۵ؚબ५бڢҊؚڢбࠒҊڶۙвڢ˅ؚঌӚݷΊௌ੄َؚڤڢڤௌвؚͻҊબڢвҊͻҊڶۙвӚؚвؚбàΊàࠒҊҊؚҊؚڢڶвڢбڢݷΊӚҊؚۙҊгڢؚڢؚۙгڤàίӚَؚڤڢΞબௌߊؚڢΞסбڢƴؚסؚҊڤҊΞҊௌߊَؚڤڢбબҊ۵˅ؚঌڢгΊӚؚΒƴڢڢ۵סͻҊڶƴסҊؚвڢ੄ௌؚסίݪίӚؚסۙҊгڤӚϏססؚӚϏסڢӚબ٬ௌߊؚΒƴڢڢ۵סƴؚڶۙӚબסؚڶબסΞƴڢ۵ؚڢَӚڶௌ۵סؚסؚàбௌۙڢͻௌ۵סȈؚӚؚгબڢбӚબ٬ௌ੄ؚвڢҊௌ੄ؚƴڢশબסƴؚۙвڢڢбࠒҊؚڶَڢڶڢбҊَؚڤסвҊڶۙסؚƴؚסڶͻҊίڢвҊס५ؚݷסίסؚӚَؚબӚҊۙҊȈؚвڢ੄ӚَؚҊڤҊߊڢΊסؚۙвؚסà५َؚબڢڶƴڢڶۙ٬ؚݪؚסশڢڤ۵ӚϏסڢà५˅ؚǸশڢڤ۵ӚϏסڢӚज़ؚвڢ੄Ӛؚݪؚסশڢڤ۵ӚϏסڢڢҊَؚڤڢۙסвڢбڢڤڶۙвڢؚڶؚϏҊબ٬५ؚӚҊڶҊסज़ؚàࠒҊڤбӚؚвӚݷௌ۵ؚڶۙڤàƴۙàڤӚ۵َؚڤڢۙסвסƴӚȈَؚڢΊڤௌвӚؚҊгڢَؚڢબסۙסͻҊڶƴڢ੄ؚסؚڶڢϏסӚબ٬ڢ੄ؚڶסڶۙҊ۵ȈؚӚؚۙӚƴݷҊؚΊҊڶۙӚбסબסίӚϏססؚڢбࠒҊڶۙвӚؚסؚгڢڶàΊӚڤڶۙвӚَؚڤڢۙסвסƴӚ˅""")
         # ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ!!!
 
         # Frame for buttons
@@ -201,6 +201,10 @@ class CryptographyApp(ctk.CTk):
                                     input_text, key)                                
                             elif cipher == "Sha_1":
                                 result = Sha_1.sha_1(key.encode('utf-8'))  
+                            elif cipher == "Algebra":
+                                 obj = AlgebraOfMatrix(key)
+                                 result = obj.encrypt(
+                                    input_text)                                     
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:
@@ -227,6 +231,10 @@ class CryptographyApp(ctk.CTk):
                                     input_text, key)
                             elif cipher == "Sha_1":
                                 result = Sha_1.sha_1(key.encode('utf-8'))  
+                            elif cipher == "Algebra":
+                                obj = AlgebraOfMatrix(key)
+                                result = obj.encrypt(
+                                    input_text)    
                             else:
                                 raise ValueError("Unsupported cipher!")
                         # Добавляем успешный результат
@@ -314,7 +322,11 @@ class CryptographyApp(ctk.CTk):
                                     input_text, key)
                             elif cipher == "Hill":
                                 result = HillCipher.decrypt_ascii(
-                                    input_text, key)                                
+                                    input_text, key)         
+                            elif cipher == "Algebra":
+                                 obj = AlgebraOfMatrix(key)
+                                 result = obj.decrypt(
+                                    input_text)                           
                             else:
                                 raise ValueError("Unsupported cipher!")
                         else:
@@ -325,12 +337,14 @@ class CryptographyApp(ctk.CTk):
                                 result = PlayfairCipher.decrypt_unicode(
                                     input_text, key)
                             elif cipher == "RSA":
-                                prime_pairs_for_rsa = self.generate_rsa_prime_pairs(11, 11, 13, 13)
+                                prime_pairs_for_rsa = self.generate_rsa_prime_pairs(11, 99, 100, 300)
                                 for rsa_p, rsa_q in prime_pairs_for_rsa:
                                     try:
-                                        print_n_rsa, print_fi_n_rsa, print_e_rsa, print_d_rsa, result = RSACipher.decrypt_unicode(input_text, rsa_p, rsa_q)
+                                        result = RSACipher.find_d_and_e(rsa_p, rsa_q)
+                                        d, e, n, m = result['d'], result['e'], result['n'], result['m']
+                                        result = RSACipher.decrypt_text_from_unicode(input_text, d, n)
                                         results.append(
-                                            f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q} | N: {print_n_rsa} | FI_N: {print_fi_n_rsa} | E: {print_e_rsa} | D: {print_d_rsa} \nRESULT:\n{result}\n{'=' * 70}"
+                                            f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q} | N: {n} | FI_N: {m} | E: {e} | D: {d} \nRESULT:\n{result}\n{'=' * 70}"
                                         )
                                     except Exception as e:
                                         results.append(
@@ -348,6 +362,10 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Gronsfeld":
                                 result = GronsfeldCipher.decrypt_unicode(
                                     input_text, key)
+                            elif cipher == "Algebra":
+                                 obj = AlgebraOfMatrix(key)
+                                 result = obj.decrypt(
+                                    input_text)       
                             else:
                                 raise ValueError("Unsupported cipher!")
                         # Добавляем успешный результат

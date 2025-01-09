@@ -9,6 +9,7 @@ from .gronsfeld import GronsfeldCipher
 from .sha1 import Sha_1
 from .hill import HillCipher
 from .testCipher import TestCipher
+from .algebra import AlgebraOfMatrix
 
 __all__ = [
     "AtbashCipher",
@@ -22,4 +23,5 @@ __all__ = [
     "Sha_1",
     "HillCipher",
     "TestCipher",
+    "AlgebraOfMatrix",
 ]

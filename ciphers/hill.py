@@ -1,5 +1,5 @@
 import numpy as np
-from cipher import *
+# from cipher import *
 
 from ciphers.testCipher import TestCipher
 

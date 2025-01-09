@@ -8,7 +8,8 @@ class VerticalCipher:
     def encrypt_ascii(source_text: str, key: str) -> str:
         # Уникальные символы ключа
         unique_key = ''.join(sorted(set(key), key=lambda x: key.index(x)))
-        sorted_key = ''.join(sorted(unique_key))
+        sorted_key = ''.join(sorted(unique_key, key=lambda x: str(ord(x)))) # Сортировка в строчном виде
+        #sorted_key = ''.join(sorted(unique_key)) # Сортировка кодов символа как числа
 
         columns = len(unique_key)
         rows = (len(source_text) + columns - 1) // columns  # Похоже на Math.Ceiling
@@ -38,7 +39,8 @@ class VerticalCipher:
         source_text = ""
         # Уникальные символы ключа
         unique_key = ''.join(sorted(set(key), key=lambda x: key.index(x)))
-        sorted_key = ''.join(sorted(unique_key))
+        sorted_key = ''.join(sorted(unique_key, key=lambda x: str(ord(x)))) # Сортировка в строчном виде
+        #sorted_key = ''.join(sorted(unique_key)) # Сортировка кодов символа как числа
 
         columns = len(unique_key)
         rows = (len(cipher_text) + columns - 1) // columns  # Похоже на Math.Ceiling

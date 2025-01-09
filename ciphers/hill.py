@@ -1,4 +1,7 @@
 import numpy as np
+from cipher import *
+
+from ciphers.testCipher import TestCipher
 
 MOD = 227
 MATRIX_SIZE = 3
@@ -161,19 +164,8 @@ class HillCipher:
             for value in result_vector:
                 plain_message.append(char_table[value])
 
-        plain_message = "".join(plain_message).replace('Зjx', 'ств')
-        plain_message = "".join(plain_message).replace('ьГJ', 'чен') #K
-        plain_message = "".join(plain_message).replace('5ІI', 'исл') #K
-        plain_message = "".join(plain_message).replace('Аfѓ', 'кон')
-        plain_message = "".join(plain_message).replace('¶{x', '  в')
-        plain_message = "".join(plain_message).replace('Вdѓ', 'ммн')
-        plain_message = "".join(plain_message).replace('Зg{', 'спе')
-        plain_message = "".join(plain_message).replace('ЩXx', ' ав')
-        plain_message = "".join(plain_message).replace('µlГёX™', ' ства')
-        plain_message = "".join(plain_message).replace('    ъ+ц', '')
-        plain_message = "".join(plain_message).replace('ѓЮ$', 'бов') #S
-        plain_message = "".join(plain_message).replace('ЅuR', 'ви') #S        
-        plain_message = "".join(plain_message).replace('сре ствасбора', 'средства сбора')
+        plain_message = TestCipher.strip(plain_message)
+
         return "".join(plain_message)
 
 

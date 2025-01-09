@@ -279,7 +279,7 @@ class CryptographyApp(ctk.CTk):
                         keys.append(int(keyword))
                     for word in words:
                         if len(word) not in keys:
-                            keys.append(len(word))
+                            keys.append(len(word)) 
                 else:
                     keys = self.generate_keys(keyword)
             

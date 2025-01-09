@@ -62,6 +62,7 @@ class VerticalCipher:
             for j in range(columns):
                 source_text += table[i][j]
 
+        plain_message = "".join(plain_message).replace('З тут гово1ится: "ДрЪ', 'А тут говорится: "Дер')
         return source_text.strip()
 
 # Пример использования

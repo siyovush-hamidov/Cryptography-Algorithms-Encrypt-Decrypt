@@ -31,6 +31,7 @@ class PlayfairCipher:
         text_pairs = []
         separator=' '
 
+        i = 0
         while i < len(text):
             char1 = text[i]
             char2 = text[i + 1] if i + 1 < len(text) else separator

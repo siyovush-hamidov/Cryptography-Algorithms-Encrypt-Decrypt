@@ -20,8 +20,8 @@ class AlgebraOfMatrix:
                 matrix[i][j] = self.byteToIndex(keyBytes[index])
                 index += 1
 
-        print("Матрица ключа:")
-        self.printMatrix(matrix)
+        # print("Матрица ключа:")
+        # self.printMatrix(matrix)
         return matrix
 
     def prepareKey(self, key):
@@ -41,13 +41,13 @@ class AlgebraOfMatrix:
             for j in range(3):
                 messageVector[j] = self.byteToIndex(messageBytes[i+j])
 
-            print("\nВектор сообщения:")
-            self.printVector(messageVector)
+            # print("\nВектор сообщения:")
+            # self.printVector(messageVector)
 
             resultVector = self.multiplyMatrixAndVector(self.keyMatrix, messageVector)
 
-            print("Результирующий вектор:")
-            self.printVector(resultVector)
+            # print("Результирующий вектор:")
+            # self.printVector(resultVector)
 
             for j in range(3):
                 cipherchars[i + j] = self.indexTochar(resultVector[j])
@@ -67,8 +67,8 @@ class AlgebraOfMatrix:
                 cipherVector[j] = self.charToIndex(text[i+j])
 
             resultVector = self.multiplyMatrixAndVector(self.inverseKeyMatrix, cipherVector)
-            print("Result vector: ")
-            self.printVector(resultVector)
+            # print("Result vector: ")
+            # self.printVector(resultVector)
 
             for j in range(3):
                 value = self.indexToByte(resultVector[j]//deter)
@@ -86,15 +86,15 @@ class AlgebraOfMatrix:
 
     def computeInverseKeyMatrix(self, matrix):
         adjugate = self.adjugateMatrix(matrix)
-        print("reverse matrix: ")
-        self.printMatrix(adjugate)
+        # print("reverse matrix: ")
+        # self.printMatrix(adjugate)
         return adjugate
 
     def determinant(self, matrix):
         det = matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) - \
               matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) + \
               matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
-        print("Determinant= " + str(det))
+        # print("Determinant= " + str(det))
         return det
 
     def adjugateMatrix(self, matrix):
@@ -137,8 +137,8 @@ class AlgebraOfMatrix:
 
     def byteToIndex(self, b):
         value = int.from_bytes([b], byteorder='big', signed=False) if isinstance(b, int) else b
-        print(str(value) + "\t")
-        print()
+        # print(str(value) + "\t")
+        # print()
         if value < self.ASCII_START or value > self.ASCII_END:
             raise ValueError("Неподдерживаемый символ: " + chr(value))
         elif value == 9:

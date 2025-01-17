@@ -10,8 +10,6 @@ class CryptographyApp(ctk.CTk):
         self.geometry(f"{self.winfo_screenwidth()}x{self.winfo_screenheight()}")
 
         self.available_ciphers = ["All", "Caesar", "Playfair", "RSA", "Vertical", "Vijiner", "DESS", "Gronsfeld", "Hill", "Algebra"]
-        self.ascii_alphabet = "".join(chr(i).encode('latin1').decode(
-            'cp1251', errors='replace') for i in range(32, 256))
 
         options_frame = ctk.CTkFrame(self)
         options_frame.pack(pady=10, fill=ctk.X)
@@ -62,22 +60,12 @@ class CryptographyApp(ctk.CTk):
         self.rsa_q_edit = ctk.CTkEntry(
             options_frame, placeholder_text="RSA: q", width=60)
         self.rsa_q_edit.pack(side=ctk.LEFT, padx=5)
-        # self.keyword_entry.insert(-1, "")
-        #########################################
-        # self.rsa_d_edit = ctk.CTkEntry(
-        #     options_frame, placeholder_text="RSA: d", width=60)
-        # self.rsa_d_edit.pack(side=ctk.LEFT, padx=5)
-        # # self.keyword_entry.insert(-1, "")
-        # self.rsa_n_edit = ctk.CTkEntry(
-        #     options_frame, placeholder_text="RSA: n", width=60)
-        # self.rsa_n_edit.pack(side=ctk.LEFT, padx=5)
-        # self.keyword_entry.insert(-1, "")
-        # Input Memo
+        
         self.input_text = ctk.CTkTextbox(
             self, width=700, height=self.winfo_screenheight() // 4)
         self.input_text.pack(pady=5, fill=ctk.X)
-        # self.input_text.insert("1.0", """ڤڢгڤҊڶڶؚвؚڢвҊ੄Ξסߊؚסশڢڤ۵ӚϏסڢௌߊؚۙҊߊڢબڢгסज़ߊؚΊҊબӚҊؚۙвҊڶ٬۵Ӛؚàज़ίвס۵ௌ۵ؚબ५бڢҊؚڢбࠒҊڶۙвڢ˅ؚঌӚݷΊௌ੄َؚڤڢڤௌвؚͻҊબڢвҊͻҊڶۙвӚؚвؚбàΊàࠒҊҊؚҊؚڢڶвڢбڢݷΊӚҊؚۙҊгڢؚڢؚۙгڤàίӚَؚڤڢΞબௌߊؚڢΞסбڢƴؚסؚҊڤҊΞҊௌߊَؚڤڢбબҊ۵˅ؚঌڢгΊӚؚΒƴڢڢ۵סͻҊڶƴסҊؚвڢ੄ௌؚסίݪίӚؚסۙҊгڤӚϏססؚӚϏסڢӚબ٬ௌߊؚΒƴڢڢ۵סƴؚڶۙӚબסؚڶબסΞƴڢ۵ؚڢَӚڶௌ۵סؚסؚàбௌۙڢͻௌ۵סȈؚӚؚгબڢбӚબ٬ௌ੄ؚвڢҊௌ੄ؚƴڢশબסƴؚۙвڢڢбࠒҊؚڶَڢڶڢбҊَؚڤסвҊڶۙסؚƴؚסڶͻҊίڢвҊס५ؚݷסίסؚӚَؚબӚҊۙҊȈؚвڢ੄ӚَؚҊڤҊߊڢΊסؚۙвؚסà५َؚબڢڶƴڢڶۙ٬ؚݪؚסশڢڤ۵ӚϏסڢà५˅ؚǸশڢڤ۵ӚϏסڢӚज़ؚвڢ੄Ӛؚݪؚסশڢڤ۵ӚϏסڢڢҊَؚڤڢۙסвڢбڢڤڶۙвڢؚڶؚϏҊબ٬५ؚӚҊڶҊסज़ؚàࠒҊڤбӚؚвӚݷௌ۵ؚڶۙڤàƴۙàڤӚ۵َؚڤڢۙסвסƴӚȈَؚڢΊڤௌвӚؚҊгڢَؚڢબסۙסͻҊڶƴڢ੄ؚסؚڶڢϏסӚબ٬ڢ੄ؚڶסڶۙҊ۵ȈؚӚؚۙӚƴݷҊؚΊҊڶۙӚбסબסίӚϏססؚڢбࠒҊڶۙвӚؚסؚгڢڶàΊӚڤڶۙвӚَؚڤڢۙסвסƴӚ˅""")
-        # ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ!!!
+        # self.input_text.insert("1.0", """બڢгסज़ߊؚΊҊબӚҊؚۙвҊڶ٬۵Ӛؚàज़ίвס۵ௌ۵ؚબ५бڢҊؚڢбࠒҊڶۙвڢ˅ؚঌӚݷΊௌ੄َؚڤڢڤௌвؚͻҊબڢвҊͻҊڶۙвӚؚвؚбàΊàࠒҊҊؚҊؚڢڶвڢбڢݷΊӚҊؚۙҊгڢؚڢؚۙгڤàίӚَؚڤڢΞબௌߊؚڢΞסбڢƴؚסؚҊڤҊΞҊௌߊَؚڤڢбબҊ۵˅ؚঌڢгΊӚؚΒƴڢڢ۵סͻҊڶƴסҊؚвڢ੄ௌؚסίݪίӚؚסۙҊгڤӚϏססؚӚϏסڢӚબ٬ௌߊؚΒƴڢڢ۵סƴؚڶۙӚબסؚڶબסΞƴڢ۵ؚڢَӚڶௌ۵סؚסؚàбௌۙڢͻௌ۵סȈؚӚؚгબڢбӚબ٬ௌ੄ؚвڢҊௌ੄ؚƴڢশબסƴؚۙвڢڢбࠒҊؚڶَڢڶڢбҊَؚڤסвҊڶۙסؚƴؚסڶͻҊίڢвҊס५ؚݷסίסؚӚَؚબӚҊۙҊȈؚвڢ੄ӚَؚҊڤҊߊڢΊסؚۙвؚסà५َؚબڢڶƴڢڶۙ٬ؚݪؚסশڢڤ۵ӚϏסڢà५˅ؚǸশڢڤ۵ӚϏסڢӚज़ؚвڢ੄Ӛؚݪؚסশڢڤ۵ӚϏסڢڢҊَؚڤڢۙסвڢбڢڤڶۙвڢؚڶؚϏҊબ٬५ؚӚҊڶҊסज़ؚàࠒҊڤбӚؚвӚݷௌ۵ؚڶۙڤàƴۙàڤӚ۵َؚڤڢۙסвסƴӚȈَؚڢΊڤௌвӚؚҊгڢَؚڢબסۙסͻҊڶƴڢ੄ؚסؚڶڢϏסӚબ٬ڢ੄ؚڶסڶۙҊ۵ȈؚӚؚۙӚƴݷҊؚΊҊڶۙӚбסબסίӚϏססؚڢбࠒҊڶۙвӚؚסؚгڢڶàΊӚڤڶۙвӚَؚڤڢۙסвסƴӚ˅""")
+        # # ЭТО НУЖНО ЧТОБЫ СДЕЛАТЬ ХАРДКОД / ДЛЯ ПРОВЕРКИ / НЕ СТИРАТЬ!!!
 
         # Frame for buttons
         button_frame = ctk.CTkFrame(self)
@@ -178,12 +166,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Playfair":
                                 result = PlayfairCipher.encrypt_ascii(
                                     input_text, key)
-                            elif cipher == "RSA":
-                                pass
-                                # result, rsa_d, rsa_n = RSACipher.encrypt_ascii(
-                                #     input_text, self.ascii_alphabet, int(rsa_p), int(rsa_q))
-                                # results.append(f"P: {rsa_p} | Q: {rsa_q} | D: {
-                                #                rsa_d} | N: {rsa_n}")
+                            # elif cipher == "RSA":
+                            #     p, q = int(self.rsa_p_edit.get()), int(self.rsa_q_edit.get())
+                            #     result = RSACipher.encrypt_unicode(input_text, p, q)
                             elif cipher == "Vertical":
                                 result = VerticalCipher.encrypt_ascii(
                                     input_text, key)
@@ -214,9 +199,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Playfair":
                                 result = PlayfairCipher.encrypt_unicode(
                                     input_text, key)
-                            elif cipher == "RSA":
-                                result = RSACipher.encrypt_unicode(
-                                    input_text, key)
+                            # elif cipher == "RSA":
+                            #     p, q = int(self.rsa_p_edit.get()), int(self.rsa_q_edit.get())
+                            #     result = RSACipher.encrypt_unicode(input_text, p, q)
                             elif cipher == "Vertical":
                                 result = VerticalCipher.encrypt_unicode(
                                     input_text, key)
@@ -280,6 +265,7 @@ class CryptographyApp(ctk.CTk):
 
         try:
             # Генерация ключей
+            prime_pairs_for_rsa = self.generate_rsa_prime_pairs(11, 99, 11, 300)
             words = keyword.split()
             keys = [] 
             ciphers_to_use = [selected_cipher] if selected_cipher != "All" else self.available_ciphers[1:]
@@ -305,9 +291,18 @@ class CryptographyApp(ctk.CTk):
                                 result = PlayfairCipher.decrypt_ascii(
                                     input_text, key)
                             # elif cipher == "RSA":
-                            #     result = RSACipher.decrypt_ascii(input_text, int(
-                            #         rsa_d), int(rsa_n), self.ascii_alphabet)
-                            #     results.append(f"D: {rsa_d} | N: {rsa_n}")
+                            #     char_table = "".join(chr(i).encode('latin1').decode('cp1251', errors='replace') for i in range(32, 256))
+                            #     for rsa_p, rsa_q in prime_pairs_for_rsa:
+                            #         try:
+                            #             d, e = RSACipher.calculate_d_and_e(rsa_p, rsa_q)
+                            #             result = RSACipher.decrypt_unicode(input_text, rsa_p, rsa_q, d, char_table)
+                            #             results.append(
+                            #                 f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q} | E: {e} | D: {d} \nRESULT:\n{result}\n{'=' * 70}"
+                            #             )
+                            #         except Exception as e:
+                            #             results.append(
+                            #                 f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q}\nERROR:\n{str(e)}\n{'=' * 70}"
+                            #             )
                             elif cipher == "Vertical":
                                 result = VerticalCipher.decrypt_ascii(
                                     input_text, key)
@@ -336,20 +331,19 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Playfair":
                                 result = PlayfairCipher.decrypt_unicode(
                                     input_text, key)
-                            elif cipher == "RSA":
-                                prime_pairs_for_rsa = self.generate_rsa_prime_pairs(11, 99, 100, 300)
-                                for rsa_p, rsa_q in prime_pairs_for_rsa:
-                                    try:
-                                        result = RSACipher.find_d_and_e(rsa_p, rsa_q)
-                                        d, e, n, m = result['d'], result['e'], result['n'], result['m']
-                                        result = RSACipher.decrypt_text_from_unicode(input_text, d, n)
-                                        results.append(
-                                            f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q} | N: {n} | FI_N: {m} | E: {e} | D: {d} \nRESULT:\n{result}\n{'=' * 70}"
-                                        )
-                                    except Exception as e:
-                                        results.append(
-                                            f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q}\nERROR:\n{str(e)}\n{'=' * 70}"
-                                        )
+                            # elif cipher == "RSA":
+                            #     char_table = "".join(chr(i).encode('latin1').decode('cp1251', errors='replace') for i in range(32, 256))
+                            #     for rsa_p, rsa_q in prime_pairs_for_rsa:
+                            #         try:
+                            #             d, e = RSACipher.calculate_d_and_e(rsa_p, rsa_q)
+                            #             result = RSACipher.decrypt_unicode(input_text, rsa_p, rsa_q, d, char_table)
+                            #             results.append(
+                            #                 f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q} | E: {e} | D: {d} \nRESULT:\n{result}\n{'=' * 70}"
+                            #             )
+                            #         except Exception as e:
+                            #             results.append(
+                            #                 f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q}\nERROR:\n{str(e)}\n{'=' * 70}"
+                            #             )
                             elif cipher == "Vertical":
                                 result = VerticalCipher.decrypt_unicode(
                                     input_text, key)
@@ -381,9 +375,8 @@ class CryptographyApp(ctk.CTk):
                         )
         except Exception as e:
             results.append(f"Error: {str(e)}")
-        with open("results.txt", "w", encoding="utf-8") as file:
+        with open("results.txt", "w", encoding="utf8") as file:
             file.write("\n".join(results))
         # Вывод всех результатов в output_text
         self.output_text.delete("1.0", ctk.END)
         self.output_text.insert(ctk.END, "\n".join(results))
-

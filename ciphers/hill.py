@@ -17,9 +17,9 @@ char_table = [
     ]
 
 # Для проверки таблицы символов
-print(char_table)
-for i, char in enumerate(char_table, start=0):
-    print(f"{i}\t{ord(char)}\t{repr(char)}")
+# print(char_table)
+# for i, char in enumerate(char_table, start=0):
+#     print(f"{i}\t{ord(char)}\t{repr(char)}")
 
 class HillCipher:
     @staticmethod
@@ -59,8 +59,8 @@ class HillCipher:
             for j in range(MATRIX_SIZE):
                 matrix[i][j] = HillCipher.byte_to_index(key[index])
                 index += 1
-        print("Матрица ключа:")
-        HillCipher.print_matrix(matrix)
+        # print("Матрица ключа:")
+        # HillCipher.print_matrix(matrix)
         return matrix
 
     @staticmethod
@@ -78,8 +78,8 @@ class HillCipher:
                 inverse[i][j] = (adjugate[i][j] * mod_inverse - 1) % MOD + 1
                 if inverse[i][j] < 0:
                     inverse[i][j] += MOD
-        print("Обратная матрица:")
-        HillCipher.print_matrix(inverse)
+        # print("Обратная матрица:")
+        # HillCipher.print_matrix(inverse)
         return inverse
 
     @staticmethod
@@ -87,7 +87,7 @@ class HillCipher:
         det = (matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) - 
                matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) + 
                matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])) % MOD
-        print(f"Determinant = {det}")
+        # print(f"Determinant = {det}")
         return det
 
     @staticmethod
@@ -144,8 +144,8 @@ class HillCipher:
         message = HillCipher.prepare_message(message)
         for i in range(0, len(message), MATRIX_SIZE):
             message_vector = [char_table.index(message[i + j]) for j in range(MATRIX_SIZE)]
-            print("\nВектор сообщения:")
-            HillCipher.print_vector(message_vector)
+            # print("\nВектор сообщения:")
+            # HillCipher.print_vector(message_vector)
             result_vector = HillCipher.multiply_matrix_and_vector(key_matrix, message_vector)
             for value in result_vector:
                 cipher_message.append(char_table[value])
@@ -154,7 +154,7 @@ class HillCipher:
     @staticmethod
     def decrypt_ascii(cipher_text,key):
         cipher_text = HillCipher.prepare_message(cipher_text)
-        print(len(cipher_text))
+        # print(len(cipher_text))
         key_matrix = HillCipher.create_key_matrix(key)
         inverse_key_matrix = HillCipher.compute_inverse_key_matrix(key_matrix)
         plain_message = []

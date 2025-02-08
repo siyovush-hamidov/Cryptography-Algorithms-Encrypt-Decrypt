@@ -30,15 +30,16 @@ class AlgebraOfMatrix:
         elif len(key) < 9:
             return "{:<9}".format(key)
         return key
-
+    
     def encrypt(self, message):
         message = self.prepareMessage(message)
         messageBytes = message.encode(self.ENCODING)
+        # byte[] cipherBytes = new byte[messageBytes.length];
         cipherchars = [' '] * len(message)
-
-        for i in range(0, len(message), 3):
-            messageVector = [0, 0, 0]
-            for j in range(3):
+        
+        for i in range(0, len(message), self.matrixSize):
+            messageVector = [0] * self.matrixSize
+            for j in range(self.matrixSize):
                 messageVector[j] = self.byteToIndex(messageBytes[i+j])
 
             # print("\nВектор сообщения:")
@@ -51,10 +52,11 @@ class AlgebraOfMatrix:
 
             for j in range(3):
                 cipherchars[i + j] = self.indexTochar(resultVector[j])
-
+        
         result = ""
         for cipherchar in cipherchars:
             result += cipherchar
+            
         return result
 
     def decrypt(self, text):

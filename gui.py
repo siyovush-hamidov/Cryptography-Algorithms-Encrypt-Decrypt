@@ -60,7 +60,9 @@ class CryptographyApp(ctk.CTk):
         self.rsa_q_edit = ctk.CTkEntry(
             options_frame, placeholder_text="RSA: q", width=60)
         self.rsa_q_edit.pack(side=ctk.LEFT, padx=5)
-        
+        self.rsa_d_edit = ctk.CTkEntry(
+            options_frame, placeholder_text="RSA: d", width=60)
+        self.rsa_d_edit.pack(side=ctk.LEFT, padx=5)
         self.input_text = ctk.CTkTextbox(
             self, width=700, height=self.winfo_screenheight() // 4)
         self.input_text.pack(pady=5, fill=ctk.X)
@@ -123,7 +125,12 @@ class CryptographyApp(ctk.CTk):
         
         rsa_p = self.rsa_p_edit.get().strip()
         rsa_q = self.rsa_q_edit.get().strip()
-    
+        rsa_d = self.rsa_d_edit.get().strip()
+        
+        if rsa_p and rsa_q and rsa_d and rsa_p.isdigit() and rsa_q.isdigit() and rsa_d.isdigit():
+            rsa_p = int(rsa_p)
+            rsa_q = int(rsa_q)
+            rsa_d = int(rsa_d)
         selected_cipher = self.cipher_combobox.get()
         # Переменная для хранения результатов
         results = []
@@ -199,9 +206,9 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Playfair":
                                 result = PlayfairCipher.encrypt_unicode(
                                     input_text, key)
-                            # elif cipher == "RSA":
-                            #     p, q = int(self.rsa_p_edit.get()), int(self.rsa_q_edit.get())
-                            #     result = RSACipher.encrypt_unicode(input_text, p, q)
+                            elif cipher == "RSA":
+                                result = RSACipher.encrypt(
+                                    input_text, rsa_p, rsa_q, rsa_d)
                             elif cipher == "Vertical":
                                 result = VerticalCipher.encrypt_unicode(
                                     input_text, key)
@@ -247,7 +254,9 @@ class CryptographyApp(ctk.CTk):
         mode = self.radio_var.get()
 
         selected_cipher = self.cipher_combobox.get()
-
+        
+        rsa_p = self.rsa_p_edit.get().strip()
+        rsa_q = self.rsa_q_edit.get().strip()
         # Переменная для хранения результатов
         results = []
 
@@ -331,19 +340,32 @@ class CryptographyApp(ctk.CTk):
                             elif cipher == "Playfair":
                                 result = PlayfairCipher.decrypt_unicode(
                                     input_text, key)
-                            # elif cipher == "RSA":
-                            #     char_table = "".join(chr(i).encode('latin1').decode('cp1251', errors='replace') for i in range(32, 256))
-                            #     for rsa_p, rsa_q in prime_pairs_for_rsa:
-                            #         try:
-                            #             d, e = RSACipher.calculate_d_and_e(rsa_p, rsa_q)
-                            #             result = RSACipher.decrypt_unicode(input_text, rsa_p, rsa_q, d, char_table)
-                            #             results.append(
-                            #                 f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q} | E: {e} | D: {d} \nRESULT:\n{result}\n{'=' * 70}"
-                            #             )
-                            #         except Exception as e:
-                            #             results.append(
-                            #                 f"CIPHER: {cipher.upper()} | DECRYPT | P: {rsa_p} | Q: {rsa_q}\nERROR:\n{str(e)}\n{'=' * 70}"
-                            #             )
+                            elif cipher == "RSA":
+                                if rsa_p and rsa_q and rsa_p.isdigit() and rsa_q.isdigit():
+                                    rsa_p = int(rsa_p)
+                                    rsa_q = int(rsa_q)
+                                else:
+                                    rsa_p = None
+                                    rsa_q = None
+                                if rsa_p is not None and rsa_q is not None:
+                                    try:
+                                        result = RSACipher.decrypt(input_text, rsa_p, rsa_q)
+                                        if result:  # Проверяем, что result не пуст
+                                            formatted_result = "\n\n".join(result)
+                                            results.append(f"P: {rsa_p} | Q: {rsa_q}\nRESULT:\n{formatted_result}\n{'=' * 70}")
+                                    except Exception as e:
+                                        results.append(f"P: {rsa_p} | Q: {rsa_q}\nERROR:\n{str(e)}\n{'=' * 70}")
+                                else:
+                                    prime_pairs_for_rsa = self.generate_rsa_prime_pairs(11, 99, 100, 300)
+                                    results.append(f"CIPHER: {cipher.upper()} | DECRYPT")
+                                    for rsa_p, rsa_q in prime_pairs_for_rsa:
+                                        try:
+                                            result = RSACipher.decrypt(input_text, rsa_p, rsa_q)
+                                            if result:  # Проверяем, что result не пуст
+                                                formatted_result = "\n\n".join(result)
+                                                results.append(f"P: {rsa_p} | Q: {rsa_q}\nRESULT:\n{formatted_result}\n{'=' * 70}")
+                                        except Exception as e:
+                                            results.append(f"P: {rsa_p} | Q: {rsa_q}\nERROR:\n{str(e)}\n{'=' * 70}")
                             elif cipher == "Vertical":
                                 result = VerticalCipher.decrypt_unicode(
                                     input_text, key)
